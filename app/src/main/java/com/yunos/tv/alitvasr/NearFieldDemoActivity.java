@@ -37,7 +37,7 @@ import java.io.DataOutputStream;
 
 public class NearFieldDemoActivity extends AppCompatActivity implements IUiManager {
     private static String TAG = "NearFieldDemoActivity";
-    private Button wakeup;
+    private Button wakeup, startTalk, stopTalk;
     private TextView asrResult;
     private TextView nluResult;
 
@@ -45,53 +45,58 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
     private NearFieldRecorder recorder;
     private DataOutputStream dos;
     private boolean save = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AliGenieSDK.getInstance(this).init("db643dcd-b096-43e8-9707-6f34d36a1549"/*"ef785ed9-785e-41e4-8c84-ff82f41528f8"*/,this, RecorderFactory.getNearFieldRecorder(16000, 1, MediaRecorder.AudioSource.VOICE_RECOGNITION, AudioFormat.ENCODING_PCM_16BIT), null);
+        AliGenieSDK.getInstance(this).init("db643dcd-b096-43e8-9707-6f34d36a1549"/*"ef785ed9-785e-41e4-8c84-ff82f41528f8"*/, this, RecorderFactory.getNearFieldRecorder(16000, 1, MediaRecorder.AudioSource.MIC, AudioFormat.ENCODING_PCM_16BIT), null);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.near_field);
-        wakeup = findViewById(R.id.wakeup_press);
+        wakeup = findViewById(R.id.wake);
+        startTalk = findViewById(R.id.startTalk);
+        stopTalk = findViewById(R.id.stopTalk);
         asrResult = findViewById(R.id.asr_result);
         nluResult = findViewById(R.id.nlu_result);
         recorder = RecorderManager.getInstance().getRecorder();
 
         wakeup.setOnTouchListener(new View.OnTouchListener() {
             @Override
+
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_UP://松开事件发生后执行代码的区域
-                        Log.e(TAG,"wakeup released");
+                        Log.e(TAG, "wakeup released");
                         mIsWakeup = false;
                         recorder.vadEnd();
                         break;
                     case MotionEvent.ACTION_DOWN://按住事件发生后执行代码的区域
-                        Log.e(TAG,"wakeup pressed");
+                        Log.e(TAG, "wakeup pressed");
                         if (!mIsWakeup) {
                             mIsWakeup = true;
                             recorder.wakeup();
+
                         }
                         break;
                     default:
                         break;
+
                 }
                 return true;
             }
         });
-
 
         wakeup.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 if (keyEvent.getKeyCode() == 23) {
                     if (keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
-                        Log.e(TAG,"wakeup pressed");
+                        Log.e(TAG, "wakeup pressed");
                         if (!mIsWakeup) {
                             mIsWakeup = true;
                             recorder.wakeup();
                         }
                     } else if (keyEvent.getAction() == KeyEvent.ACTION_UP) {
-                        Log.e(TAG,"wakeup released");
+                        Log.e(TAG, "wakeup released");
                         mIsWakeup = false;
                         recorder.vadEnd();
                     }
@@ -101,7 +106,21 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
             }
         });
 
+        startTalk.setOnClickListener(new View.OnClickListener()
 
+        {
+            public void onClick(View var1) {
+                recorder.wakeup();
+            }
+        });
+
+        stopTalk.setOnClickListener(new View.OnClickListener()
+
+        {
+            public void onClick(View var1) {
+                recorder.vadEnd();
+            }
+        });
     }
 
     @Override
@@ -116,6 +135,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
 
     /**
      * 对话面板出现和消失的回调
+     *
      * @param isShow true:出现 false:消失
      */
     @Override
@@ -125,6 +145,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
 
     /**
      * 开始录音的回调
+     *
      * @param sessionId
      */
     @Override
@@ -134,6 +155,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
 
     /**
      * 实时ASR语音转文字
+     *
      * @param sessionId
      * @param streamText
      * @param isFinish
@@ -147,6 +169,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
 
     /**
      * 音量变更回调
+     *
      * @param sessionId
      * @param volume
      */
@@ -157,22 +180,24 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
 
     /**
      * 录音结束回调
+     *
      * @param sessionId
      */
     @Override
     public void onRecordStop(int sessionId) {
-        Log.e(TAG, "sessionId = " + sessionId );
+        Log.e(TAG, "sessionId = " + sessionId);
 
     }
 
     /**
      * NLP语义解析结果回调，原始数据
+     *
      * @param sessionId
      * @param data
      */
     @Override
     public void onRecognizeResult(int sessionId, ProtocolData data) {
-        Log.e(TAG, "sessionId = " + sessionId  + ",data = " + data.toString());
+        Log.e(TAG, "sessionId = " + sessionId + ",data = " + data.toString());
         nluResult.setText(data.toString());
     }
 
@@ -186,6 +211,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
 
     /**
      * 面板是否显示
+     *
      * @return
      */
     @Override
@@ -195,6 +221,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
 
     /**
      * NLP语义预处理回调，已废弃
+     *
      * @param i
      * @param s
      * @param s1
@@ -209,6 +236,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
 
     /**
      * NLP语义预处理回调，将领域，命令名，命令参数预解析出来，方便使用
+     *
      * @param sessionId
      * @param data
      * @param commandDomain
@@ -218,13 +246,15 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
      * @return
      */
     @Override
-    public int onPretreatedResult(int sessionId, ProtocolData data, String commandDomain, String command, JSONObject commandParams, String question) {
-        Log.e(TAG, "sessionId = " + sessionId  + ",commandDomain = " + commandDomain + ",command = " + command + ",commandParams = " + commandParams.toString());
+    public int onPretreatedResult(int sessionId, ProtocolData data, String
+            commandDomain, String command, JSONObject commandParams, String question) {
+        Log.e(TAG, "sessionId = " + sessionId + ",commandDomain = " + commandDomain + ",command = " + command + ",commandParams = " + commandParams.toString());
         return 0;
     }
 
     /**
      * 底层通知回调，包括账号绑定，音量设置等通知
+     *
      * @param type
      * @param data
      * @param arg1
@@ -232,11 +262,12 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
      */
     @Override
     public void onNotify(int type, Object data, int arg1, int arg2) {
-        LogUtils.d("type="+type+",Object="+data+",arg1="+arg1+",arg2="+arg2);
+        LogUtils.d("type=" + type + ",Object=" + data + ",arg1=" + arg1 + ",arg2=" + arg2);
     }
 
     /**
      * IUIListener只有onShow一个接口，用于给其他类提供一个面板弹出时的回调入口
+     *
      * @param listener
      */
     @Override
@@ -254,6 +285,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
 
     /**
      * 获取机顶盒上下文信息
+     *
      * @param isScreen
      * @param thridContext
      * @return

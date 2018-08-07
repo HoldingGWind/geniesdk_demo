@@ -4,12 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <Button
-        android:id="@+id/wakeup_press"
+        android:id="@+id/wake"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="按住说话"/>
+        android:text="按住说话"
+        android:onClick="onStartTalk"/>
+
+
+    <Button
+        android:id="@+id/startTalk"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="点击开始说话"
+        android:onClick="onStartTalk"/>
+
+
+    <Button
+        android:id="@+id/stopTalk"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="点击停止说话"
+        android:onClick="onStopTalk"/>
 
     <TextView
         android:layout_width="match_parent"
