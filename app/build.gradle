@@ -1,0 +1,76 @@
+apply plugin: 'com.android.application'
+
+
+project.ext.set("archivesBaseName", 'GenieSdkDemo-' + project.APP_VERSION_NAME)
+
+android {
+    compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_COMPILE_SDK_VERSION)
+    buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
+
+    signingConfigs {
+        config {
+            storeFile file('../tools/platform_debug.keystore')
+        }
+        debug {
+            storeFile file('../tools/platform_debug.keystore')
+        }
+    }
+    defaultConfig {
+        applicationId "com.alibaba.sdk.aligeniesdkdemo"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode Integer.parseInt(project.APP_VERSION_CODE)
+        versionName project.APP_VERSION_NAME
+        multiDexEnabled true
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    //加载aar文件，指定文件，geniesdk-debug是文件名，aar是后缀
+    //如果想在调用者中启动.aar中的Activity，需要在调用者AndroidManifest.xml中声明.aar的Activity
+//    compile (name:'geniesdk-debug',ext:'aar')
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support.constraint:constraint-layout:1.1.0'
+    //testImplementation 'junit:junit:4.12'
+    //androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    //androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    testCompile 'junit:junit:4.12'
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    //compile(name: 'geniesdk_customization_v1.1.5', ext: 'aar')
+    //compile(name: 'geniesdk_v1.1.5', ext: 'aar')
+    //compile(name: 'audioinput_v1.1.5', ext: 'aar')
+
+    //compile project(path: ':aliGenieSDK:geniesdk')
+    //compile project(path: ':geniesdk_customization')
+    //compile project(path: ':audioinput')
+    //compile 'com.alibaba:fastjson:1.1.45'
+    //provided files('classes_v2.jar')
+
+    compile(name: 'allinone_v1.0.3', ext: 'aar')
+    //compile 'com.alibaba:fastjson:1.1.45'
+    //compile project(path: ':allinone')
+    //compile 'com.ailabs.geniesdk.app:allinone:1.0.39-SNAPSHOT'
+    compile 'com.alibaba:fastjson:1.1.45'
+    compile 'com.aliyun.openservices:aliyun-log-android-sdk:0.4.0'
+}

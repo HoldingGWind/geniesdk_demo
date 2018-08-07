@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/wakeup_music"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="我要听歌"
+        android:onClick="onButton1Click"/>
+
+    <Button
+        android:id="@+id/wakeup_weather"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="今天的天气"
+        android:onClick="onButton2Click"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="ASR识别结果："/>
+
+    <TextView
+        android:id="@+id/asr_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="NLU识别结果："/>
+
+    <TextView
+        android:id="@+id/nlu_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"/>
+
+</LinearLayout>

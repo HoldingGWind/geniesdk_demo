@@ -1,0 +1,16 @@
+/build
+/aliGenieSDK
+/geniesdk_core
+/geniesdk
+/audioinput
+/allinone
+/geniesdk_adapter
+/AliGenieDemo.iml
+/AliGenieSDKDemo.iml
+/gradlew.bat
+/gradlew
+/.gradle
+/.idea
+/app/app.iml
+/local.properties
+

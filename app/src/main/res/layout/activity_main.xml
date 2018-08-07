@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yunos.tv.alitvasr.MainActivity">
+
+
+    <Button
+        android:id="@+id/near_field"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="近场模式"
+        android:onClick="onButton1Click"/>
+
+    <Button
+        android:id="@+id/raw_data"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="远场模式--原始音频数据"
+        android:onClick="onButton2Click"/>
+
+    <Button
+        android:id="@+id/processed_data"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="远场模式--语音信号处理过的单路音频数据"
+        android:onClick="onButton3Click"/>
+
+    <Button
+        android:id="@+id/text_data"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="纯文字流模式"
+        android:onClick="onButton4Click"/>
+
+
+</LinearLayout>

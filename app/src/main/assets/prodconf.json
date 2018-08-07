@@ -1,0 +1,65 @@
+{
+  "version": 20180328,
+  "env": "daily",
+  "config": [
+    {
+      "environment": "online",
+      "system": {
+        "biz_type": "qYKRXQlI",
+        "biz_group": "kAxqJXyN"
+      },
+      "gateway_cloud": {
+        "port": 443,
+        "use_ssl": true,
+        "protocol_ver": "1.0",
+        "addr": "g-aicloud.cp12.wasu.tv"
+      },
+      "speech": {
+        "addr": "asr-aicloud.cp12.wasu.tv",
+        "port": 443,
+        "use_ssl": true,
+        "coretype": "cn.asr.rec",
+        "res": "aihome",
+        "audio_type": "ogg",
+        "compress": "speex",
+        "quality": 8
+      }
+    },
+    {
+      "environment": "daily",
+      "system": {
+        "biz_type": "AILABS",
+        "biz_group": "TMALL_ROBOT"
+      },
+      "gateway_cloud": {
+        "port": 443,
+        "use_ssl": true,
+        "protocol_ver": "1.0",
+        "addr": "g-aicloud.cp12.wasu.tv"
+      },
+      "speech": {
+        "addr": "asr-aicloud.cp12.wasu.tv",
+        "port": 443,
+        "use_ssl": true,
+        "coretype": "cn.asr.rec",
+        "res": "aihome",
+        "audio_type": "ogg",
+        "compress": "speex",
+        "quality": 8
+      }
+    }
+  ],
+  "featureList": {
+    "otaUpdate": 1,
+    "countDown": 1,
+    "utpControl": 1,
+    "askCmdQueue": 1,
+    "voiceMessage": 1,
+    "deviceSetting": 1,
+    "iotSubDevice": 1,
+    "clockTimer": 1,
+    "nightLight": 1,
+    "operation": 1
+  }
+}
+
