@@ -1,54 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/wake"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:text="按住说话"
-        android:onClick="onStartTalk"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/wake"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:onClick="onStartTalk"
+            android:text="按住说话" />
 
 
-    <Button
-        android:id="@+id/startTalk"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:text="点击开始说话"
-        android:onClick="onStartTalk"/>
+        <Button
+            android:id="@+id/startTalk"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:onClick="onStartTalk"
+            android:text="点击开始说话" />
 
 
-    <Button
-        android:id="@+id/stopTalk"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:text="点击停止说话"
-        android:onClick="onStopTalk"/>
+        <Button
+            android:id="@+id/stopTalk"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:onClick="onStopTalk"
+            android:text="点击停止说话" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text="ASR识别结果："/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ASR识别结果："
+            android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/asr_result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"/>
+        <TextView
+            android:id="@+id/asr_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30sp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text="NLU识别结果："/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NLU识别结果："
+            android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/nlu_result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"/>
+        <TextView
+            android:id="@+id/nlu_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30sp" />
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>
