@@ -1,6 +1,6 @@
 {
   "version": 20180328,
-  "env": "daily",
+  "env": "online",
   "config": [
     {
       "environment": "online",
@@ -12,10 +12,10 @@
         "port": 443,
         "use_ssl": true,
         "protocol_ver": "1.0",
-        "addr": "g-aicloud.cp12.wasu.tv"
+        "addr": "g-aicloud.alibaba.com"
       },
       "speech": {
-        "addr": "asr-aicloud.cp12.wasu.tv",
+        "addr": "asr-aicloud.alibaba.com",
         "port": 443,
         "use_ssl": true,
         "coretype": "cn.asr.rec",
@@ -35,10 +35,10 @@
         "port": 443,
         "use_ssl": true,
         "protocol_ver": "1.0",
-        "addr": "g-aicloud.cp12.wasu.tv"
+        "addr": "gdev-aicloud.alibaba.com"
       },
       "speech": {
-        "addr": "asr-aicloud.cp12.wasu.tv",
+        "addr": "asr-aicloud.alibaba.com",
         "port": 443,
         "use_ssl": true,
         "coretype": "cn.asr.rec",

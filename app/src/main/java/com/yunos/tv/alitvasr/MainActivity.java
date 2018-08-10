@@ -63,13 +63,13 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == code) {
             for (int i = 0; i < permissions.length; i++) {
                 if (Manifest.permission.RECORD_AUDIO.equals(permissions[i]) && grantResults[i] == 0) {
-                    Log.i(TAG,"onRequestPermissionsResult RECORD_AUDIO permission GRANTED!");
+                    Log.i(TAG, "onRequestPermissionsResult RECORD_AUDIO permission GRANTED!");
                     Toast.makeText(this, "permission granted!", Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
+            Toast.makeText(this, "permission not granted!", Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(this, "permission not granted!", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             if (shouldShowRequestPermissionRationale(Manifest.permission.RECORD_AUDIO)) {
                 Toast.makeText(this, "App required access to audio", Toast.LENGTH_SHORT).show();
             }
-            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION}, requestCode);
+            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, requestCode);
         }
     }
 
