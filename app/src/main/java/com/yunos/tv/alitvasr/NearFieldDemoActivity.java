@@ -54,7 +54,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AliGenieSDK.getInstance(this).init("wj-1af93289-f170-4678-9f48-35e275dd3294", this,
+        AliGenieSDK.getInstance(this).init("db643dcd-b096-43e8-9707-6f34d36a1549", this,
                 RecorderFactory.getNearFieldRecorder(16000, 1, MediaRecorder.AudioSource.MIC, AudioFormat.ENCODING_PCM_16BIT),
                 this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
