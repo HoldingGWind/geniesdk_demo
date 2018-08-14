@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.media.AudioFormat;
 import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -21,6 +22,10 @@ import com.alibaba.ailabs.custom.util.SystemInfo;
 import com.alibaba.ailabs.geniesdk.audioin.recorder.NearFieldRecorder;
 import com.alibaba.ailabs.geniesdk.util.LogUtils;
 import com.alibaba.ailabs.geniesdk_adapter.audioin.RecorderFactory;
+import com.alibaba.ailabs.geniesdk_adapter.core.ActionConstant;
+import com.alibaba.ailabs.geniesdk_adapter.core.AliGenieSDKAdapter;
+import com.alibaba.ailabs.geniesdk_adapter.core.PreOnNLPResultImpl;
+import com.alibaba.ailabs.geniesdk_adapter.core.RemoteServiceManager;
 import com.alibaba.sdk.aligeniesdkdemo.R;
 import com.yunos.tv.alitvasr.controller.IUIListener;
 import com.yunos.tv.alitvasr.controller.protocol.ProtocolData;
@@ -36,7 +41,7 @@ import java.io.DataOutputStream;
  */
 
 public class NearFieldDemoActivity extends AppCompatActivity implements IUiManager {
-    private static String TAG = "NearFieldDemoActivity";
+    private static String TAG = "geniesdk";
     private Button wakeup, startTalk, stopTalk;
     private TextView asrResult;
     private TextView nluResult;
@@ -49,7 +54,9 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AliGenieSDK.getInstance(this).init("db643dcd-b096-43e8-9707-6f34d36a1549"/*"ef785ed9-785e-41e4-8c84-ff82f41528f8"*/, this, RecorderFactory.getNearFieldRecorder(16000, 1, MediaRecorder.AudioSource.MIC, AudioFormat.ENCODING_PCM_16BIT), null);
+        AliGenieSDK.getInstance(this).init("db643dcd-b096-43e8-9707-6f34d36a1549"/*"ef785ed9-785e-41e4-8c84-ff82f41528f8"*/, this, RecorderFactory.getNearFieldRecorder(16000, 1, MediaRecorder.AudioSource.MIC, AudioFormat.ENCODING_PCM_16BIT), new PreOnNLPResultImpl());
+        //AliGenieSDK.getInstance(this).setUseThirdPartyMediaController(true);
+        //AliGenieSDKAdapter.init();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.near_field);
         wakeup = findViewById(R.id.wake);
@@ -165,6 +172,13 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
         Log.e(TAG, "sessionId = " + sessionId + ", streamText= " + streamText
                 + ", isFinish=" + isFinish);
         asrResult.setText(streamText);
+        Bundle bundle = new Bundle();
+        bundle.putString(ActionConstant.KEY_ARGS1, streamText);
+        try {
+            RemoteServiceManager.getInstance(this).call(ActionConstant.MESSAGE_ASK, bundle);
+        } catch (RemoteException e) {
+            com.alibaba.ailabs.custom.util.LogUtils.e("Call remote function failed, e="+e);
+        }
     }
 
     /**

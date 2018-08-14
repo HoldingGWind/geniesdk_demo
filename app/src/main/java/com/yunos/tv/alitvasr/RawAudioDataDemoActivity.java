@@ -5,6 +5,7 @@ import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,11 +21,14 @@ import com.alibaba.ailabs.custom.core.AliGenieSDK;
 import com.alibaba.ailabs.custom.core.Constants;
 import com.alibaba.ailabs.custom.util.SystemInfo;
 import com.alibaba.ailabs.geniesdk.audioin.recorder.BaseRecorder;
-import com.alibaba.ailabs.geniesdk.audioin.recorder.IMultiTalkCallback;
+import com.alibaba.ailabs.geniesdk.audioin.recorder.IMicController;
 import com.alibaba.ailabs.geniesdk.audioin.recorder.OutAudioDataFarFieldRecorder;
 import com.alibaba.ailabs.geniesdk.audioin.recorder.RawDataFarFieldRecorder;
 import com.alibaba.ailabs.geniesdk.util.LogUtils;
 import com.alibaba.ailabs.geniesdk_adapter.audioin.RecorderFactory;
+import com.alibaba.ailabs.geniesdk_adapter.core.ActionConstant;
+import com.alibaba.ailabs.geniesdk_adapter.core.AliGenieSDKAdapter;
+import com.alibaba.ailabs.geniesdk_adapter.core.RemoteServiceManager;
 import com.alibaba.sdk.aligeniesdkdemo.R;
 import com.yunos.tv.alitvasr.controller.IUIListener;
 import com.yunos.tv.alitvasr.controller.protocol.ProtocolData;
@@ -47,7 +51,7 @@ import java.io.OutputStream;
 
 public class RawAudioDataDemoActivity extends AppCompatActivity implements IUiManager {
 
-    private static String TAG = "RawAudioDataDemoActivity";
+    private static String TAG = "geniesdk";
     private Button wakeup;
     private TextView asrResult;
     private TextView nluResult;
@@ -62,17 +66,20 @@ public class RawAudioDataDemoActivity extends AppCompatActivity implements IUiMa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AliGenieSDK.getInstance(this).init("db643dcd-b096-43e8-9707-6f34d36a1549"/*"ef785ed9-785e-41e4-8c84-ff82f41528f8"*/,this, RecorderFactory.getRawDataFarFieldRecorder(16000, 1, MediaRecorder.AudioSource.VOICE_RECOGNITION, AudioFormat.ENCODING_PCM_16BIT), null);
+        AliGenieSDK.getInstance(this).init("db643dcd-b096-43e8-9707-6f34d36a1549"/*"ef785ed9-785e-41e4-8c84-ff82f41528f8"*/,this, RecorderFactory.getRawDataFarFieldRecorder(16000, 2, MediaRecorder.AudioSource.VOICE_RECOGNITION, AudioFormat.ENCODING_PCM_16BIT), null);
+        //AliGenieSDK.getInstance(this).setUseThirdPartyMediaController(true);
+        //AliGenieSDKAdapter.init();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.raw_audio_data);
         wakeup = findViewById(R.id.wakeup_press);
         asrResult = findViewById(R.id.asr_result);
         nluResult = findViewById(R.id.nlu_result);
         recorder = RecorderManager.getInstance().getRecorder();
-        recorder.setMultiTalkCallback(new IMultiTalkCallback() {
+        recorder.setMicController(new IMicController() {
             @Override
-            public void onMultiTalkStart() {
+            public boolean openMic() {
                 LogUtils.d("Open mic here.");
+                return true;
             }
         });
 
@@ -193,7 +200,7 @@ public class RawAudioDataDemoActivity extends AppCompatActivity implements IUiMa
     //=====TEST CODE START=====
     private DataOutputStream savePcm() {
         DataOutputStream dos;
-        File file = new File(SystemInfo.getContext().getFilesDir().getAbsolutePath() + "/test_pcm.pcm");
+        File file = new File(SystemInfo.getContext().getCacheDir().getAbsolutePath() + "/test_pcm.pcm");
         LogUtils.d("generate >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> file.");
         //如果存在，就先删除再创建
         if (file.exists())
@@ -271,6 +278,13 @@ public class RawAudioDataDemoActivity extends AppCompatActivity implements IUiMa
         Log.e(TAG, "sessionId = " + sessionId + ", streamText= " + streamText
                 + ", isFinish=" + isFinish);
         asrResult.setText(streamText);
+        Bundle bundle = new Bundle();
+        bundle.putString(ActionConstant.KEY_ARGS1, streamText);
+        try {
+            RemoteServiceManager.getInstance(this).call(ActionConstant.MESSAGE_ASK, bundle);
+        } catch (RemoteException e) {
+            com.alibaba.ailabs.custom.util.LogUtils.e("Call remote function failed, e="+e);
+        }
     }
 
     /**

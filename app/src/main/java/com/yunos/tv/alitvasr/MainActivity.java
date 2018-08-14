@@ -3,35 +3,16 @@ package com.yunos.tv.alitvasr;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.media.AudioRecord;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.Toast;
 
-import com.alibaba.ailabs.custom.audio.MediaOutputBridge;
-import com.alibaba.ailabs.custom.audio.input.RecorderManager;
-import com.alibaba.ailabs.custom.util.SystemInfo;
-import com.alibaba.ailabs.geniesdk.audioin.recorder.BaseRecorder;
-import com.alibaba.ailabs.geniesdk.audioin.recorder.IMultiTalkCallback;
-import com.alibaba.ailabs.geniesdk.audioin.recorder.RawDataFarFieldRecorder;
-import com.alibaba.ailabs.geniesdk.util.LogUtils;
 import com.alibaba.sdk.aligeniesdkdemo.R;
-import com.yunos.tv.alitvasr.controller.session.SessionID;
-
-import java.io.BufferedOutputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 
 public class MainActivity extends AppCompatActivity {
     private static String TAG = "MainActivity";
@@ -63,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == code) {
             for (int i = 0; i < permissions.length; i++) {
                 if (Manifest.permission.RECORD_AUDIO.equals(permissions[i]) && grantResults[i] == 0) {
-                    Log.i(TAG,"onRequestPermissionsResult RECORD_AUDIO permission GRANTED!");
+                    Log.i(TAG, "onRequestPermissionsResult RECORD_AUDIO permission GRANTED!");
                     Toast.makeText(this, "permission granted!", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -90,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             if (shouldShowRequestPermissionRationale(Manifest.permission.RECORD_AUDIO)) {
                 Toast.makeText(this, "App required access to audio", Toast.LENGTH_SHORT).show();
             }
-            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION}, requestCode);
+            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, requestCode);
         }
     }
 
