@@ -27,8 +27,13 @@ import com.alibaba.ailabs.geniesdk_adapter.core.AliGenieSDKAdapter;
 import com.alibaba.ailabs.geniesdk_adapter.core.PreOnNLPResultImpl;
 import com.alibaba.ailabs.geniesdk_adapter.core.RemoteServiceManager;
 import com.alibaba.sdk.aligeniesdkdemo.R;
+import com.yunos.tv.alitvasr.controller.Controller;
 import com.yunos.tv.alitvasr.controller.IUIListener;
+import com.yunos.tv.alitvasr.controller.protocol.CommandInfo;
 import com.yunos.tv.alitvasr.controller.protocol.ProtocolData;
+import com.yunos.tv.alitvasr.controller.protocol.ProtocolExtra;
+import com.yunos.tv.alitvasr.controller.protocol.ReturnCode;
+import com.yunos.tv.alitvasr.controller.session.IPreOnNLPResult;
 import com.yunos.tv.alitvasr.ui.interfaces.IBaseView;
 import com.yunos.tv.alitvasr.ui.interfaces.IUiManager;
 
@@ -40,8 +45,9 @@ import java.io.DataOutputStream;
  * Created by miyang on 2018/8/7.
  */
 
-public class NearFieldDemoActivity extends AppCompatActivity implements IUiManager {
+public class NearFieldDemoActivity extends AppCompatActivity implements IUiManager, IPreOnNLPResult {
     private static String TAG = "geniesdk";
+
     private Button wakeup, startTalk, stopTalk;
     private TextView asrResult;
     private TextView nluResult;
@@ -54,7 +60,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AliGenieSDK.getInstance(this).init("db643dcd-b096-43e8-9707-6f34d36a1549"/*"ef785ed9-785e-41e4-8c84-ff82f41528f8"*/, this, RecorderFactory.getNearFieldRecorder(16000, 1, MediaRecorder.AudioSource.MIC, AudioFormat.ENCODING_PCM_16BIT), new PreOnNLPResultImpl());
+        AliGenieSDK.getInstance(this).init("db643dcd-b096-43e8-9707-6f34d36a1549"/*"ef785ed9-785e-41e4-8c84-ff82f41528f8"*/, this, RecorderFactory.getNearFieldRecorder(16000, 1, MediaRecorder.AudioSource.MIC, AudioFormat.ENCODING_PCM_16BIT), this);
         //AliGenieSDK.getInstance(this).setUseThirdPartyMediaController(true);
         //AliGenieSDKAdapter.init();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -207,12 +213,12 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
      * NLP语义解析结果回调，原始数据
      *
      * @param sessionId
-     * @param data
+     * @param protocolData
      */
     @Override
-    public void onRecognizeResult(int sessionId, ProtocolData data) {
-        Log.e(TAG, "sessionId = " + sessionId + ",data = " + data.toString());
-        nluResult.setText(data.toString());
+    public void onRecognizeResult(int sessionId, ProtocolData protocolData) {
+        Log.e(TAG, "sessionId = " + sessionId + ",data = " + protocolData.toString());
+        nluResult.setText(protocolData.toString());
     }
 
     /**
@@ -309,4 +315,20 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
         return "{\"systemInfo\":{\"area_code\":\"\",\"uuid\":\"928911AD5D41A7FD9BFCE90E0A86C96D\",\"device_model\":\"MagicBox_M18S\",\"device_firmware_version\":\"6.1.0-R-20180417.0354\",\"firmware\":\"6.1.0-R-20180417.0354\",\"edu_version_code\":2100405003,\"device_sn\":\"928911AD5D41A7FD9BFCE90E0A86C96D\",\"bcp\":\"1\",\"charge_type\":\"2,3,5\",\"from\":\"0,7\",\"device_media\":\"s265_1080p\",\"sw\":\"sw1080\",\"version_code\":2120511020},\"sceneInfo\":\"{\\\"appPackage\\\":\\\"com.alibaba.sdk.aligeniesdkdemo\\\",\\\"clientVersion\\\":2100607006,\\\"clientVersionName\\\":\\\"7.0.06\\\",\\\"clientTime\\\":1524575642306,\\\"system_locale\\\":\\\"浙江省 杭州市 市辖区\\\",\\\"deviceMode\\\":0,\\\"location\\\":\\\"浙江省 杭州市 市辖区\\\",\\\"city\\\":\\\"浙江省\\\",\\\"useApp\\\":\\\"com.yunos.tv.homeshell\\\",\\\"useAppClientVersion\\\":\\\"2100590020\\\",\\\"timezone\\\":\\\"Asia\\\\\\/Shanghai\\\",\\\"micType\\\":0}\",\"sceneExtInfo\":\"{\\\"context\\\":\\\"{\\\\\\\"pageSizeMax\\\\\\\":20}\\\"}\",\"packageInfo\":\"{\\\"com.yunos.tv.appstore\\\":\\\"2101407000\\\",\\\"com.yunos.tv.yingshi.boutique\\\":\\\"2120506118\\\"}\",\"memory\":\"1991\",\"clientVersion\":\"2100607006\",\"localeInfo\":\"{\\\"language\\\":\\\"zh\\\",\\\"country\\\":\\\"CN\\\"}\",\"protocolVersion\":2}";
     }
 
+
+    /**
+     * 业务方预处理各个命令，由于服务端下发的多为组合命令，注意处理islast的属性
+     *
+     * @param sessionId
+     * @param command
+     * @return 参考 ReturnCode
+     *                  CONTINUE = 0;    //数据继续向下分发
+     *                  STOP = 1;    //数据停止向下分发，并关闭界面
+     *                  STOP_NO_HIDE = 2;    //数据停止向下分发，保留界面
+     */
+    @Override
+    public int pretreatedNLPResult(int sessionId, String command) {
+        Log.d(TAG, ">>>>>command=" + command);
+        return ReturnCode.CONTINUE;
+    }
 }

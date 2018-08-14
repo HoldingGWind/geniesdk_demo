@@ -1,21 +1,21 @@
 {
   "version": 20180328,
-  "env": "daily",
+  "env": "online",
   "config": [
     {
       "environment": "online",
       "system": {
-        "biz_type": "qYKRXQlI",
-        "biz_group": "kAxqJXyN"
+        "biz_type": "AILABS",
+        "biz_group": "TMALL_ROBOT"
       },
       "gateway_cloud": {
         "port": 443,
         "use_ssl": true,
         "protocol_ver": "1.0",
-        "addr": "g-aicloud.cp12.wasu.tv"
+        "addr": "g-aicloud.alibaba.com"
       },
       "speech": {
-        "addr": "asr-aicloud.cp12.wasu.tv",
+        "addr": "asr-aicloud.alibaba.com",
         "port": 443,
         "use_ssl": true,
         "coretype": "cn.asr.rec",
@@ -35,10 +35,10 @@
         "port": 443,
         "use_ssl": true,
         "protocol_ver": "1.0",
-        "addr": "g-aicloud.cp12.wasu.tv"
+        "addr": "gdev-aicloud.alibaba.com"
       },
       "speech": {
-        "addr": "asr-aicloud.cp12.wasu.tv",
+        "addr": "asr-aicloud.alibaba.com",
         "port": 443,
         "use_ssl": true,
         "coretype": "cn.asr.rec",
