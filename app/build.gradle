@@ -29,7 +29,7 @@ android {
             }
         } else {
             ndk {
-                abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86"
+                abiFilters "armeabi"
             }
         }
     }
@@ -59,14 +59,16 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile project(path: ':AliGenieSDK:geniesdk')
-    compile project(path: ':geniesdk_core')
-    compile project(path: ':geniesdk_adapter')
-    compile project(path: ':audioinput')
-    //compile 'com.alibaba:fastjson:1.1.45'
+    if (Boolean.parseBoolean(project.DEBUG)) {
+        compile project(path: ':AliGenieSDK:geniesdk')
+        compile project(path: ':geniesdk_core')
+        compile project(path: ':geniesdk_adapter')
+        compile project(path: ':audioinput')
+    }else{
+        compile(name: 'allinone-v' + project.SDK_VERSION_NAME+'-release', ext: 'aar')
+    }
     //provided files('classes_v2.jar')
 
-    //compile(name: 'allinone_v1.0.3', ext: 'aar')
     compile 'com.alibaba:fastjson:1.1.45'
     compile 'com.aliyun.openservices:aliyun-log-android-sdk:0.4.0'
 }

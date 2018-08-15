@@ -1,11 +1,9 @@
 package com.yunos.tv.alitvasr;
 
-import android.content.Intent;
 import android.media.AudioFormat;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -15,26 +13,19 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.alibaba.ailabs.custom.audio.MediaOutputBridge;
 import com.alibaba.ailabs.custom.audio.input.RecorderManager;
 import com.alibaba.ailabs.custom.core.AliGenieSDK;
-import com.alibaba.ailabs.custom.core.Constants;
-import com.alibaba.ailabs.custom.util.SystemInfo;
 import com.alibaba.ailabs.geniesdk.audioin.recorder.NearFieldRecorder;
 import com.alibaba.ailabs.geniesdk.util.LogUtils;
 import com.alibaba.ailabs.geniesdk_adapter.audioin.RecorderFactory;
 import com.alibaba.ailabs.geniesdk_adapter.core.ActionConstant;
-import com.alibaba.ailabs.geniesdk_adapter.core.AliGenieSDKAdapter;
-import com.alibaba.ailabs.geniesdk_adapter.core.PreOnNLPResultImpl;
 import com.alibaba.ailabs.geniesdk_adapter.core.RemoteServiceManager;
 import com.alibaba.sdk.aligeniesdkdemo.R;
-import com.yunos.tv.alitvasr.controller.Controller;
 import com.yunos.tv.alitvasr.controller.IUIListener;
-import com.yunos.tv.alitvasr.controller.protocol.CommandInfo;
 import com.yunos.tv.alitvasr.controller.protocol.ProtocolData;
-import com.yunos.tv.alitvasr.controller.protocol.ProtocolExtra;
 import com.yunos.tv.alitvasr.controller.protocol.ReturnCode;
 import com.yunos.tv.alitvasr.controller.session.IPreOnNLPResult;
-import com.yunos.tv.alitvasr.ui.interfaces.IBaseView;
 import com.yunos.tv.alitvasr.ui.interfaces.IUiManager;
 
 import org.json.JSONObject;
@@ -183,8 +174,8 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
         bundle.putString(ActionConstant.KEY_ARGS1, streamText);
         try {
             RemoteServiceManager.getInstance(this).call(ActionConstant.MESSAGE_ASK, bundle);
-        } catch (RemoteException e) {
-            com.alibaba.ailabs.custom.util.LogUtils.e("Call remote function failed, e="+e);
+        } catch (Exception e) {
+            LogUtils.e("Call remote function failed, e=" + e);
         }
     }
 
@@ -252,7 +243,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
      */
     @Override
     public int onPretreatedResult(int i, String s, String s1, JSONObject jsonObject, String s2) {
-        return 0;
+        return ReturnCode.CONTINUE;
     }
 
     /**
@@ -269,7 +260,14 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
     @Override
     public int onPretreatedResult(int sessionId, ProtocolData data, String
             commandDomain, String command, JSONObject commandParams, String question) {
-        Log.e(TAG, "sessionId = " + sessionId + ",commandDomain = " + commandDomain + ",command = " + command + ",commandParams = " + commandParams.toString());
+        LogUtils.d("sessionId = " + sessionId + ",commandDomain = " + commandDomain + ",command = " + command + ",commandParams = " + commandParams.toString());
+        if (commandDomain.equals("AliGenie.System.Control")) {
+            if (command.equals("Exit")) {
+                LogUtils.d("It is exit command!");
+                MediaOutputBridge.getInstance().clean();
+            }
+        }
+
         return ReturnCode.CONTINUE;
     }
 
@@ -323,9 +321,9 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
      * @param sessionId
      * @param command
      * @return 参考 ReturnCode
-     *                  CONTINUE = 0;    //数据继续向下分发
-     *                  STOP = 1;    //数据停止向下分发，并关闭界面
-     *                  STOP_NO_HIDE = 2;    //数据停止向下分发，保留界面
+     * CONTINUE = 0;    //数据继续向下分发
+     * STOP = 1;    //数据停止向下分发，并关闭界面
+     * STOP_NO_HIDE = 2;    //数据停止向下分发，保留界面
      */
     @Override
     public int pretreatedNLPResult(int sessionId, String command) {

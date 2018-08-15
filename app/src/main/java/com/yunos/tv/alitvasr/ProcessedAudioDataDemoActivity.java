@@ -1,15 +1,11 @@
 package com.yunos.tv.alitvasr;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -19,9 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.alibaba.ailabs.custom.audio.MediaOutputBridge;
 import com.alibaba.ailabs.custom.audio.input.RecorderManager;
 import com.alibaba.ailabs.custom.core.AliGenieSDK;
 import com.alibaba.ailabs.custom.core.Constants;
@@ -29,11 +23,9 @@ import com.alibaba.ailabs.custom.util.SystemInfo;
 import com.alibaba.ailabs.geniesdk.audioin.recorder.BaseRecorder;
 import com.alibaba.ailabs.geniesdk.audioin.recorder.IMicController;
 import com.alibaba.ailabs.geniesdk.audioin.recorder.OutAudioDataFarFieldRecorder;
-import com.alibaba.ailabs.geniesdk.audioin.recorder.RawDataFarFieldRecorder;
 import com.alibaba.ailabs.geniesdk.util.LogUtils;
 import com.alibaba.ailabs.geniesdk_adapter.audioin.RecorderFactory;
 import com.alibaba.ailabs.geniesdk_adapter.core.ActionConstant;
-import com.alibaba.ailabs.geniesdk_adapter.core.AliGenieSDKAdapter;
 import com.alibaba.ailabs.geniesdk_adapter.core.RemoteServiceManager;
 import com.alibaba.sdk.aligeniesdkdemo.R;
 import com.yunos.tv.alitvasr.controller.IUIListener;
@@ -41,6 +33,7 @@ import com.yunos.tv.alitvasr.controller.protocol.ProtocolData;
 import com.yunos.tv.alitvasr.controller.session.SessionID;
 import com.yunos.tv.alitvasr.ui.interfaces.IBaseView;
 import com.yunos.tv.alitvasr.ui.interfaces.IUiManager;
+
 
 import org.json.JSONObject;
 
@@ -73,7 +66,6 @@ public class ProcessedAudioDataDemoActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         AliGenieSDK.getInstance(this).init("db643dcd-b096-43e8-9707-6f34d36a1549"/*"ef785ed9-785e-41e4-8c84-ff82f41528f8"*/,this, RecorderFactory.getOutAudioDataFarFieldRecorder(16000, 2, MediaRecorder.AudioSource.VOICE_RECOGNITION, AudioFormat.ENCODING_PCM_16BIT), null);
         //AliGenieSDK.getInstance(this).setUseThirdPartyMediaController(true);
-        //AliGenieSDKAdapter.init();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.processed_audio_data);
         wakeup = findViewById(R.id.wakeup_press);
