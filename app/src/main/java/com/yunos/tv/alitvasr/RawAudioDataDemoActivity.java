@@ -282,8 +282,8 @@ public class RawAudioDataDemoActivity extends AppCompatActivity implements IUiMa
         bundle.putString(ActionConstant.KEY_ARGS1, streamText);
         try {
             RemoteServiceManager.getInstance(this).call(ActionConstant.MESSAGE_ASK, bundle);
-        } catch (RemoteException e) {
-            com.alibaba.ailabs.custom.util.LogUtils.e("Call remote function failed, e="+e);
+        } catch (Exception e) {
+            LogUtils.e("Call remote function failed, e="+e);
         }
     }
 
