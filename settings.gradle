@@ -1,1 +1,1 @@
-include ':app',':AliGenieSDK:geniesdk',':geniesdk_core',':geniesdk_adapter',':audioinput'
+include ':app',':AliGenieSDK:geniesdk',':geniesdk_core',':geniesdk_adapter',':audioinput',':allinone'

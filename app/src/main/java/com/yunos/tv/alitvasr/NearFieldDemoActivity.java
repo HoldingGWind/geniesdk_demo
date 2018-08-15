@@ -270,7 +270,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
     public int onPretreatedResult(int sessionId, ProtocolData data, String
             commandDomain, String command, JSONObject commandParams, String question) {
         Log.e(TAG, "sessionId = " + sessionId + ",commandDomain = " + commandDomain + ",command = " + command + ",commandParams = " + commandParams.toString());
-        return 0;
+        return ReturnCode.CONTINUE;
     }
 
     /**
