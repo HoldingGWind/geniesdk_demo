@@ -60,6 +60,27 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+
+        <activity
+            android:name="com.yunos.tv.alitvasr.account.BindDeviceGuideActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="com.yunos.tv.altvasr.showQrCode" />
+                <action android:name="com.yunos.tv.altvasr.bindResponse" />
+                <action android:name="com.yunos.tv.altvasr.bindUser" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="user_bind"
+                    android:scheme="alitv_asr" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

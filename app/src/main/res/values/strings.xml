@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">AliGenieSDKDemo</string>
+
+    <string name="bind_device_page_title">请按如下步骤操作，天猫精灵才能为您提供服务哦!</string>
+    <string name="down_app_page_title1">手机扫码下载天猫精灵</string>
+    <string name="down_app_page_title2">登录后，点击"技能"扫码</string>
+    <string name="down_app_page_text1">下载</string>
+    <string name="down_app_page_text2">天猫精灵</string>
+    <string name="down_app_page_title3">使用"扫码添加设备"</string>
+    <string name="down_app_page_text3">扫一扫</string>
+    <string name="down_app_page_text4">添加设备</string>
+    <string name="login_success_page_title">- 精灵账号 -</string>
+    <string name="login_success_page_introduce">如需解绑，请至手机天猫精灵APP</string>
+    <string name="login_success_page_username_defort">未知</string>
 </resources>

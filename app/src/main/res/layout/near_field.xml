@@ -11,25 +11,28 @@
         <Button
             android:id="@+id/wake"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:onClick="onStartTalk"
+            android:layout_height="60dp"
             android:text="按住说话" />
 
 
         <Button
             android:id="@+id/startTalk"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:onClick="onStartTalk"
+            android:layout_height="60dp"
             android:text="点击开始说话" />
 
 
         <Button
             android:id="@+id/stopTalk"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:onClick="onStopTalk"
+            android:layout_height="60dp"
             android:text="点击停止说话" />
+
+        <Button
+            android:id="@+id/showLogin"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="弹出登录页面" />
 
         <TextView
             android:layout_width="match_parent"

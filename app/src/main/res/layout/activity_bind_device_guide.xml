@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_80"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@color/black_80"
+        android:id="@+id/bind_page_id">
+        <TextView
+            android:id="@+id/bind_page_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="82dp"
+            android:textSize="23sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="@string/bind_device_page_title"/>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="64dp">
+
+                <ImageView
+                    android:id="@+id/img_id1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/icon_1" />
+
+                <TextView
+                    android:id="@+id/donwn_app_title_text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@id/img_id1"
+                    android:layout_marginLeft="6dp"
+                    android:gravity="center"
+                    android:text="@string/down_app_page_title1"
+                    android:textColor="@color/white"
+                    android:includeFontPadding="false"
+                    android:textSize="17sp" />
+
+                <LinearLayout
+                    android:layout_width="245dp"
+                    android:layout_height="386dp"
+                    android:layout_below="@id/donwn_app_title_text1"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/bind_device_qrcode_bbg"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:gravity="center"
+                        android:text="@string/down_app_page_text1"
+                        android:textColor="@color/white"
+                        android:textSize="17sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="@string/down_app_page_text2"
+                        android:textColor="@color/white"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        android:id="@+id/down_app_qrcode"
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:layout_marginTop="45dp"
+                        android:background="@drawable/bind_device_qrcode_img_bg" />
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="64dp">
+                <ImageView
+                    android:id="@+id/img_id2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/icon_2" />
+
+                <TextView
+                    android:id="@+id/donwn_app_title_text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@id/img_id2"
+                    android:layout_marginLeft="6dp"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="@string/down_app_page_title2"
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
+
+
+                <ImageView
+                    android:layout_width="255dp"
+                    android:layout_height="383dp"
+                    android:layout_below="@id/donwn_app_title_text2"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/gennie_app_guid_pic"
+                    android:scaleType="centerInside"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="64dp">
+
+                <ImageView
+                    android:id="@+id/img_id3"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/icon_3" />
+
+                <TextView
+                    android:id="@+id/donwn_app_title_text3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@id/img_id3"
+                    android:layout_marginLeft="6dp"
+                    android:gravity="center"
+                    android:text="@string/down_app_page_title3"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
+
+                <LinearLayout
+                    android:layout_width="245dp"
+                    android:layout_height="386dp"
+                    android:layout_below="@id/donwn_app_title_text3"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/bind_device_qrcode_bbg"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:gravity="center"
+                        android:text="@string/down_app_page_text3"
+                        android:textColor="@color/white"
+                        android:textSize="17sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="@string/down_app_page_text4"
+                        android:textColor="@color/white"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        android:id="@+id/bind_device_qrcode"
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:layout_marginTop="45dp"
+                        android:background="@drawable/bind_device_qrcode_img_bg" />
+
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:id="@+id/bind_success_id"
+        android:background="@drawable/bind_device_success_page_bg"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/login_success_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#FFF5F5F5"
+            android:textSize="30sp"
+            android:text="@string/login_success_page_title"/>
+
+
+        <ImageView
+            android:id="@+id/login_user_icon"
+            android:layout_marginTop="-16dp"
+            android:layout_width="356dp"
+            android:layout_height="356dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/bind_user_pic_bg"/>
+
+        <TextView
+            android:id="@+id/login_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-60dp"
+            android:gravity="center"
+            android:textColor="#FFF5F5F5"
+            android:textSize="28sp"
+            android:text="Charists"/>
+
+        <TextView
+            android:id="@+id/login_introduce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="117dp"
+            android:gravity="center"
+            android:textColor="@color/white_80"
+            android:textSize="24sp"
+            android:text="@string/login_success_page_introduce"/>
+
+    </LinearLayout>
+
+</FrameLayout>
+

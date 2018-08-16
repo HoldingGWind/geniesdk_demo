@@ -1,5 +1,6 @@
 package com.yunos.tv.alitvasr;
 
+import android.content.Intent;
 import android.media.AudioFormat;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -16,21 +17,27 @@ import android.widget.TextView;
 import com.alibaba.ailabs.custom.audio.MediaOutputBridge;
 import com.alibaba.ailabs.custom.audio.input.RecorderManager;
 import com.alibaba.ailabs.custom.core.AliGenieSDK;
+import com.alibaba.ailabs.custom.util.SystemInfo;
 import com.alibaba.ailabs.geniesdk.audioin.recorder.NearFieldRecorder;
 import com.alibaba.ailabs.geniesdk.util.LogUtils;
 import com.alibaba.ailabs.geniesdk_adapter.audioin.RecorderFactory;
 import com.alibaba.ailabs.geniesdk_adapter.core.ActionConstant;
 import com.alibaba.ailabs.geniesdk_adapter.core.RemoteServiceManager;
 import com.alibaba.sdk.aligeniesdkdemo.R;
+import com.yunos.tv.alitvasr.account.BindDeviceGuideActivity;
 import com.yunos.tv.alitvasr.controller.IUIListener;
 import com.yunos.tv.alitvasr.controller.protocol.ProtocolData;
 import com.yunos.tv.alitvasr.controller.protocol.ReturnCode;
 import com.yunos.tv.alitvasr.controller.session.IPreOnNLPResult;
+import com.yunos.tv.alitvasr.model.binder.UserData;
+import com.yunos.tv.alitvasr.ui.interfaces.BindDeviceListener;
+import com.yunos.tv.alitvasr.ui.interfaces.IBaseView;
 import com.yunos.tv.alitvasr.ui.interfaces.IUiManager;
 
 import org.json.JSONObject;
 
 import java.io.DataOutputStream;
+import java.lang.ref.WeakReference;
 
 /**
  * Created by miyang on 2018/8/7.
@@ -38,8 +45,9 @@ import java.io.DataOutputStream;
 
 public class NearFieldDemoActivity extends AppCompatActivity implements IUiManager, IPreOnNLPResult {
     private static String TAG = "geniesdk";
+    private static WeakReference<BindDeviceListener> bindDeviceListener;
 
-    private Button wakeup, startTalk, stopTalk;
+    private Button wakeup, startTalk, stopTalk,showLogin;
     private TextView asrResult;
     private TextView nluResult;
 
@@ -47,6 +55,11 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
     private NearFieldRecorder recorder;
     private DataOutputStream dos;
     private boolean save = true;
+
+    public static final String BIND_RESPONSE = "com.yunos.tv.altvasr.bindResponse";
+    public static final String BIND_USER = "com.yunos.tv.altvasr.bindUser";
+    public static final String SHOW_QRCODE = "com.yunos.tv.altvasr.showQrCode";
+    public static final String QRCODE_KEY = "__qrcode_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +73,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
         wakeup = findViewById(R.id.wake);
         startTalk = findViewById(R.id.startTalk);
         stopTalk = findViewById(R.id.stopTalk);
+        showLogin = findViewById(R.id.showLogin);
         asrResult = findViewById(R.id.asr_result);
         nluResult = findViewById(R.id.nlu_result);
         recorder = RecorderManager.getInstance().getRecorder();
@@ -126,7 +140,18 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
                 recorder.vadEnd();
             }
         });
+
+        showLogin.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View var1) {
+                Intent intent = new Intent();
+                intent.setClass(SystemInfo.getContext(), BindDeviceGuideActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
+
+
 
     @Override
     protected void onStart() {
@@ -282,6 +307,41 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
     @Override
     public void onNotify(int type, Object data, int arg1, int arg2) {
         LogUtils.d("type=" + type + ",Object=" + data + ",arg1=" + arg1 + ",arg2=" + arg2);
+        switch (type) {
+//            case IBaseView.NOTIFY_THRIDAPP_CONTEXT: {
+//                if (data == null) {
+//                    mThirdContext = null;
+//                } else {
+//                    mThirdContext = data.toString();
+//                }
+//            }
+//            break;
+            case IBaseView.NOTIFY_QRCODE_MESSAGE: {
+                //显示二维码
+                if (data != null) {
+                    try {
+                        Intent intent = new Intent();
+                        intent.setAction(SHOW_QRCODE);
+                        intent.setPackage(getPackageName());
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra(QRCODE_KEY, data.toString());
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    hideUi();
+                }
+            }
+            break;
+            case IBaseView.NOTIFY_BINDER_USER: {
+                //绑定设备
+                if (bindDeviceListener != null && bindDeviceListener.get() != null) {
+                    BindDeviceListener listener = bindDeviceListener.get();
+                    listener.bindResponse(0, arg1 == 0 ? false : true, (UserData) data);
+                }
+            }
+            break;
+        }
     }
 
     /**
@@ -330,4 +390,15 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
         Log.d(TAG, ">>>>>command=" + command);
         return ReturnCode.CONTINUE;
     }
+
+    public static void registerBindDeviceListener(BindDeviceListener listener) {
+        if (bindDeviceListener == null) {
+            bindDeviceListener = new WeakReference<BindDeviceListener>(listener);
+        }
+    }
+
+    public static void unregisterBindDeviceListener() {
+        bindDeviceListener = null;
+    }
+
 }
