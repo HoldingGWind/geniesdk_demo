@@ -20,6 +20,7 @@ import com.alibaba.ailabs.geniesdk.AiLabsCore;
 import com.alibaba.ailabs.geniesdk.util.LogUtils;
 import com.alibaba.sdk.aligeniesdkdemo.R;
 import com.bumptech.glide.Glide;
+import com.google.zxing.WriterException;
 import com.yunos.tv.alitvasr.NearFieldDemoActivity;
 import com.yunos.tv.alitvasr.model.binder.UserData;
 import com.yunos.tv.alitvasr.ui.interfaces.BindDeviceListener;
@@ -219,7 +220,7 @@ public class BindDeviceGuideActivity extends Activity implements BindDeviceListe
                 }else if(type.equals("1")){
                     try {
                         return QRCodeManager.create2DCode(params[1], 120, 120, null);
-                    } catch (com.google.zxing.WriterException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
