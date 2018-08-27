@@ -47,7 +47,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
     private static String TAG = "geniesdk";
     private static WeakReference<BindDeviceListener> bindDeviceListener;
 
-    private Button wakeup, startTalk, stopTalk,showLogin;
+    private Button wakeup, startTalk, stopTalk,showLogin,stopMedia;
     private TextView asrResult;
     private TextView nluResult;
 
@@ -148,6 +148,15 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
                 startActivity(intent);
             }
         });
+
+        stopMedia = findViewById(R.id.stopMedia);
+        stopMedia.setOnClickListener(new View.OnClickListener()
+
+        {
+            public void onClick(View var1) {
+                MediaOutputBridge.getInstance().stopTTSPlaying();
+            }
+        });
     }
 
 
@@ -234,7 +243,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
      */
     @Override
     public void onRecognizeResult(int sessionId, ProtocolData protocolData) {
-        Log.e(TAG, "sessionId = " + sessionId + ",data = " + protocolData.toString());
+        LogUtils.d("onRecognizeResult: sessionId = " + sessionId + ",data = " + protocolData.toString());
         nluResult.setText(protocolData.toString());
     }
 
@@ -285,7 +294,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
     @Override
     public int onPretreatedResult(int sessionId, ProtocolData data, String
             commandDomain, String command, JSONObject commandParams, String question) {
-        LogUtils.d("sessionId = " + sessionId + ",commandDomain = " + commandDomain + ",command = " + command + ",commandParams = " + commandParams.toString());
+        LogUtils.d("onPretreatedResult:sessionId = " + sessionId + ",commandDomain = " + commandDomain + ",command = " + command + ",commandParams = " + commandParams.toString());
         if (commandDomain.equals("AliGenie.System.Control")) {
             if (command.equals("Exit")) {
                 LogUtils.d("It is exit command!");
@@ -387,7 +396,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
      */
     @Override
     public int pretreatedNLPResult(int sessionId, String command) {
-        Log.d(TAG, ">>>>>command=" + command);
+        Log.d(TAG, ">>>>>pretreatedNLPResult : command=" + command);
         return ReturnCode.CONTINUE;
     }
 
