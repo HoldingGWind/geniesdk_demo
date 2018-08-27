@@ -90,7 +90,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
                         Log.e(TAG, "wakeup pressed");
                         if (!mIsWakeup) {
                             mIsWakeup = true;
-                            recorder.wakeup();
+                            recorder.wakeup(1.0, "ni hao tian mao");
 
                         }
                         break;
@@ -110,12 +110,11 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
                         Log.e(TAG, "wakeup pressed");
                         if (!mIsWakeup) {
                             mIsWakeup = true;
-                            recorder.wakeup();
+                            recorder.wakeup(1.0, "ni hao tian mao");
                         }
                     } else if (keyEvent.getAction() == KeyEvent.ACTION_UP) {
                         Log.e(TAG, "wakeup released");
                         mIsWakeup = false;
-                        recorder.vadEnd();
                     }
                     return true;
                 }
@@ -127,7 +126,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
 
         {
             public void onClick(View var1) {
-                recorder.wakeup();
+                recorder.wakeup(1.0, "ni hao tian mao");
             }
         });
 
