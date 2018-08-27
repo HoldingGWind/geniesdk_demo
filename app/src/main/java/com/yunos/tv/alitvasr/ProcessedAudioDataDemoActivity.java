@@ -16,13 +16,13 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.alibaba.ailabs.custom.audio.input.RecorderManager;
 import com.alibaba.ailabs.custom.core.AliGenieSDK;
 import com.alibaba.ailabs.custom.core.Constants;
 import com.alibaba.ailabs.custom.util.SystemInfo;
 import com.alibaba.ailabs.geniesdk.audioin.recorder.BaseRecorder;
 import com.alibaba.ailabs.geniesdk.audioin.recorder.IMicController;
 import com.alibaba.ailabs.geniesdk.audioin.recorder.OutAudioDataFarFieldRecorder;
+import com.alibaba.ailabs.geniesdk.audioin.recorder.RecorderManager;
 import com.alibaba.ailabs.geniesdk.util.LogUtils;
 import com.alibaba.ailabs.geniesdk_adapter.audioin.RecorderFactory;
 import com.alibaba.ailabs.geniesdk_adapter.core.ActionConstant;

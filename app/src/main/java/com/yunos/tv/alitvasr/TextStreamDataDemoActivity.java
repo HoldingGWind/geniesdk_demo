@@ -1,49 +1,31 @@
 package com.yunos.tv.alitvasr;
 
 import android.content.Intent;
-import android.media.AudioFormat;
-import android.media.AudioRecord;
-import android.media.MediaRecorder;
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.alibaba.ailabs.custom.audio.input.RecorderManager;
 import com.alibaba.ailabs.custom.core.AliGenieSDK;
 import com.alibaba.ailabs.custom.core.Constants;
 import com.alibaba.ailabs.custom.util.SystemInfo;
-import com.alibaba.ailabs.geniesdk.audioin.recorder.BaseRecorder;
 import com.alibaba.ailabs.geniesdk.audioin.recorder.IMicController;
 import com.alibaba.ailabs.geniesdk.audioin.recorder.OutAudioDataFarFieldRecorder;
+import com.alibaba.ailabs.geniesdk.audioin.recorder.RecorderManager;
 import com.alibaba.ailabs.geniesdk.util.LogUtils;
 import com.alibaba.ailabs.geniesdk_adapter.audioin.RecorderFactory;
 import com.alibaba.ailabs.geniesdk_adapter.core.ActionConstant;
-import com.alibaba.ailabs.geniesdk_adapter.core.AliGenieSDKAdapter;
 import com.alibaba.ailabs.geniesdk_adapter.core.RemoteServiceManager;
 import com.alibaba.sdk.aligeniesdkdemo.R;
 import com.yunos.tv.alitvasr.controller.IUIListener;
 import com.yunos.tv.alitvasr.controller.protocol.ProtocolData;
-import com.yunos.tv.alitvasr.controller.session.SessionID;
 import com.yunos.tv.alitvasr.ui.interfaces.IBaseView;
 import com.yunos.tv.alitvasr.ui.interfaces.IUiManager;
 
 import org.json.JSONObject;
-
-import java.io.BufferedOutputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 
 /**
  * Created by miyang on 2018/8/7.

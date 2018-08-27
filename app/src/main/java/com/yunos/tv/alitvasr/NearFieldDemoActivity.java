@@ -15,10 +15,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.alibaba.ailabs.custom.audio.MediaOutputBridge;
-import com.alibaba.ailabs.custom.audio.input.RecorderManager;
 import com.alibaba.ailabs.custom.core.AliGenieSDK;
 import com.alibaba.ailabs.custom.util.SystemInfo;
 import com.alibaba.ailabs.geniesdk.audioin.recorder.NearFieldRecorder;
+import com.alibaba.ailabs.geniesdk.audioin.recorder.RecorderManager;
 import com.alibaba.ailabs.geniesdk.util.LogUtils;
 import com.alibaba.ailabs.geniesdk_adapter.audioin.RecorderFactory;
 import com.alibaba.ailabs.geniesdk_adapter.core.ActionConstant;
@@ -66,8 +66,6 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
         super.onCreate(savedInstanceState);
 
         AliGenieSDK.getInstance(this).init("db643dcd-b096-43e8-9707-6f34d36a1549"/*"ef785ed9-785e-41e4-8c84-ff82f41528f8"*/, this, RecorderFactory.getNearFieldRecorder(16000, 1, MediaRecorder.AudioSource.MIC, AudioFormat.ENCODING_PCM_16BIT), this);
-        //AliGenieSDK.getInstance(this).setUseThirdPartyMediaController(true);
-        //AliGenieSDKAdapter.init();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.near_field);
         wakeup = findViewById(R.id.wake);
@@ -77,6 +75,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
         asrResult = findViewById(R.id.asr_result);
         nluResult = findViewById(R.id.nlu_result);
         recorder = RecorderManager.getInstance().getRecorder();
+        //recorder.enableDefaultVAD(false);  禁用默认的VAD
 
         wakeup.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -86,7 +85,6 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
                     case MotionEvent.ACTION_UP://松开事件发生后执行代码的区域
                         Log.e(TAG, "wakeup released");
                         mIsWakeup = false;
-                        recorder.vadEnd();
                         break;
                     case MotionEvent.ACTION_DOWN://按住事件发生后执行代码的区域
                         Log.e(TAG, "wakeup pressed");
