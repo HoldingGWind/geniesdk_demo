@@ -20,7 +20,6 @@ import com.alibaba.ailabs.geniesdk.AiLabsCore;
 import com.alibaba.ailabs.geniesdk.util.LogUtils;
 import com.alibaba.sdk.aligeniesdkdemo.R;
 import com.bumptech.glide.Glide;
-import com.google.zxing.WriterException;
 import com.yunos.tv.alitvasr.NearFieldDemoActivity;
 import com.yunos.tv.alitvasr.model.binder.UserData;
 import com.yunos.tv.alitvasr.ui.interfaces.BindDeviceListener;
