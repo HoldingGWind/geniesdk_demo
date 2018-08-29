@@ -68,4 +68,6 @@ dependencies {
     }
     compile 'com.alibaba:fastjson:1.1.45'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.aliyun.openservices:aliyun-log-android-sdk:0.4.0'
+    compile 'com.google.zxing:core:3.2.1'
 }
