@@ -1,0 +1,100 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/protocol_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/protocol_cover">
+
+
+    <TextView
+        android:id="@+id/protocol_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/protocol_title_top_margin"
+        android:text="@string/protocol_title"
+        android:textColor="@color/white"
+        android:textSize="@dimen/protocol_title_text_size" />
+
+    <RelativeLayout
+        android:id="@+id/protocol_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/protocol_content_top_margin">
+
+        <ImageView
+            android:id="@+id/protocol_context_text_top_edge"
+            android:layout_width="@dimen/protocol_content_text_width"
+            android:layout_height="1dp"
+            android:layout_alignParentTop="true"
+            android:focusable="false"
+            android:src="@color/protocol_content_text_edge" />
+
+        <ScrollView
+            android:id="@+id/protocol_content_text"
+            android:layout_width="@dimen/protocol_content_text_width"
+            android:layout_height="@dimen/protocol_content_text_height"
+            android:layout_below="@id/protocol_context_text_top_edge"
+            android:focusable="false"
+            android:scrollbarThumbVertical="@drawable/protocol_scrollbar"
+            android:scrollbars="vertical">
+
+            <LinearLayout
+                android:id="@+id/protocol_content_text_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/protocol_content_text_pading_v"
+                android:paddingLeft="@dimen/protocol_content_text_pading_h"
+                android:paddingRight="@dimen/protocol_content_text_pading_h"
+                android:paddingTop="@dimen/protocol_content_text_pading_v">
+
+                <TextView
+                    android:id="@+id/protocol_content_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="12dp"
+                    android:focusable="false"
+                    android:lineSpacingMultiplier="1.1"
+                    android:text="@string/legal_info_content_wasu"
+                    android:textColor="#ffffffff"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+        </ScrollView>
+
+        <ImageView
+            android:id="@+id/protocol_context_text_bottom_edge"
+            android:layout_width="@dimen/protocol_content_text_width"
+            android:layout_height="1dp"
+            android:layout_below="@id/protocol_content_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:focusable="false"
+            android:src="@color/protocol_content_text_edge" />
+        <!--<ImageView-->
+        <!--android:id="@+id/protocol_context_text_bottom_mask"-->
+        <!--android:layout_width="800dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginBottom="90dp"-->
+        <!--android:contentDescription="@string/image_view_desc"-->
+        <!--android:focusable="false"-->
+        <!--android:src="@color/protocol_content_text_edge" />-->
+        <Button
+            android:id="@+id/protocol_content_agree"
+            android:layout_width="240dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/protocol_content_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/protocol_content_agree_top_to_text"
+            android:background="@drawable/agree_btn_unfocus"
+            android:focusable="true"
+            android:text="@string/protocol_content_agree"
+            android:textColor="@color/black_25"
+            android:textSize="20sp" />
+    </RelativeLayout>
+</RelativeLayout>

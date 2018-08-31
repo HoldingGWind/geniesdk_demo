@@ -154,7 +154,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
 
         {
             public void onClick(View var1) {
-                MediaOutputBridge.getInstance().stopTTSPlaying();
+                MediaOutputBridge.getInstance().clean();
             }
         });
     }

@@ -12,7 +12,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.alibaba.ailabs.custom.util.SystemInfo;
 import com.alibaba.sdk.aligeniesdkdemo.R;
+import com.yunos.tv.alitvasr.account.BindDeviceGuideActivity;
 
 public class MainActivity extends AppCompatActivity {
     private static String TAG = "MainActivity";
@@ -89,5 +91,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void onButton4Click(View view) {
         startActivity(new Intent(this, TextStreamDataDemoActivity.class));
+    }
+
+    public void onButton5Click(View view) {
+        startActivity(new Intent(this, ProtocolActivity.class));
     }
 }

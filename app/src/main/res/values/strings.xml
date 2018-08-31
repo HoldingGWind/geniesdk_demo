@@ -12,4 +12,11 @@
     <string name="login_success_page_title">- 精灵账号 -</string>
     <string name="login_success_page_introduce">如需解绑，请至手机天猫精灵APP</string>
     <string name="login_success_page_username_defort">未知</string>
+
+    <string name="protocol_title">天猫精灵语音助手许可使用及服务协议</string>
+    <string name="protocol_content_agree">同 意 并 开 始 使 用</string>
+    <string name="protocol_signed">服 务 协 议 已 签 署</string>
+    <string name="protocol_not_signed">服务协议还未同意，请点击底部按钮</string>
+    <string name="permission_deny">您还未授权精灵SDK使用录音功能</string>
+
 </resources>

@@ -1,0 +1,36 @@
+<resources>
+    <dimen name="protocol_item1_left_margin">68dp</dimen>
+    <dimen name="protocol_item1_bottom_margin">436dp</dimen>
+    <dimen name="protocol_item2_left_margin">62dp</dimen>
+    <dimen name="protocol_item2_top_margin">260dp</dimen>
+    <dimen name="protocol_item3_left_to_item2">4dp</dimen>
+    <dimen name="protocol_item3_top_margin">196dp</dimen>
+    <dimen name="protocol_content_top_margin">156dp</dimen>
+    <dimen name="protocol_content_text_width">876dp</dimen>
+    <dimen name="protocol_content_text_height">418dp</dimen>
+    <dimen name="protocol_content_agree_width">200dp</dimen>
+    <dimen name="protocol_content_agree_height">60dp</dimen>
+    <dimen name="protocol_content_agree_top_to_text">46dp</dimen>
+    <dimen name="protocol_agree_text_size">24sp</dimen>
+    <dimen name="protocol_title_text_size">32sp</dimen>
+    <dimen name="protocol_title_top_margin">98dp</dimen>
+    <dimen name="protocol_content_text_pading_h">34dp</dimen>
+    <dimen name="protocol_content_text_pading_v">12dp</dimen>
+    <dimen name="qrlogin_title_top_margin">62dp</dimen>
+    <dimen name="qrlogin_title_text_size">28sp</dimen>
+    <dimen name="qrlogin_content_top_margin">50dp</dimen>
+    <dimen name="qrlogin_card1_width">276dp</dimen>
+    <dimen name="qrlogin_card1_height">435dp</dimen>
+    <dimen name="qrlogin_card2_width">306dp</dimen>
+    <dimen name="qrlogin_card2_height">435dp</dimen>
+    <dimen name="qrlogin_card_margin">73dp</dimen>
+    <dimen name="qrlogin_card2_left_margin">20dp</dimen>
+    <dimen name="qrlogin_number_width">27dp</dimen>
+    <dimen name="qrlogin_number_right_margin">5dp</dimen>
+    <dimen name="qrlogin_card_text_size">22sp</dimen>
+    <dimen name="qrlogin_card_top_margin1">30dp</dimen>
+    <dimen name="qrlogin_card_top_margin2">51dp</dimen>
+    <dimen name="qrlogin_card_qrcodebg_width">230dp</dimen>
+    <dimen name="qrlogin_card_qrcode_width">201dp</dimen>
+
+</resources>

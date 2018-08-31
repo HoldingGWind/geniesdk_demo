@@ -17,4 +17,12 @@
     <color name="black">#ff000000</color>
     <color name="black_80">#cc000000</color>
     <color name="black_50">#80000000</color>
+    <color name="black_40">#66000000</color>
+    <color name="black_25">#40000000</color>
+
+
+    <color name="protocol_title">#ffffff</color>
+    <color name="protocol_agree">#ffffffff</color>
+    <color name="protocol_content_text_edge">#7fffffff</color>
+    <color name="protocol_cover">#222B49</color>
 </resources>
