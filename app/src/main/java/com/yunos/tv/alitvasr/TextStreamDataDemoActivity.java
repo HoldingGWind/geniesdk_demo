@@ -41,7 +41,7 @@ public class TextStreamDataDemoActivity extends AppCompatActivity implements IUi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AliGenieSDK.getInstance(this).init("db643dcd-b096-43e8-9707-6f34d36a1549"/*"ef785ed9-785e-41e4-8c84-ff82f41528f8"*/,this, RecorderFactory.getTextStreamFarFieldRecorder(), null);
+        AliGenieSDK.getInstance(this).init(null,this, RecorderFactory.getTextStreamFarFieldRecorder(), null);
         //AliGenieSDK.getInstance(this).setUseThirdPartyMediaController(true);
         //AliGenieSDKAdapter.init();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

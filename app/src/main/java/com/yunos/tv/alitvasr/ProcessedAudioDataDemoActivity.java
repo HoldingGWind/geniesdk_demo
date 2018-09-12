@@ -64,7 +64,7 @@ public class ProcessedAudioDataDemoActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AliGenieSDK.getInstance(this).init("db643dcd-b096-43e8-9707-6f34d36a1549"/*"ef785ed9-785e-41e4-8c84-ff82f41528f8"*/,this, RecorderFactory.getOutAudioDataFarFieldRecorder(16000, 2, MediaRecorder.AudioSource.VOICE_RECOGNITION, AudioFormat.ENCODING_PCM_16BIT), null);
+        AliGenieSDK.getInstance(this).init(null,this, RecorderFactory.getOutAudioDataFarFieldRecorder(16000, 2, MediaRecorder.AudioSource.VOICE_RECOGNITION, AudioFormat.ENCODING_PCM_16BIT), null);
         //AliGenieSDK.getInstance(this).setUseThirdPartyMediaController(true);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.processed_audio_data);

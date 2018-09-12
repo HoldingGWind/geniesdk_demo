@@ -68,7 +68,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        AliGenieSDK.getInstance(this).init("db643dcd-b096-43e8-9707-6f34d36a1549"/*"ef785ed9-785e-41e4-8c84-ff82f41528f8"*/, this, RecorderFactory.getNearFieldRecorder(16000, 1, MediaRecorder.AudioSource.MIC, AudioFormat.ENCODING_PCM_16BIT), this);
+        AliGenieSDK.getInstance(this).init(null, this, RecorderFactory.getNearFieldRecorder(16000, 1, MediaRecorder.AudioSource.MIC, AudioFormat.ENCODING_PCM_16BIT), this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.near_field);
         wakeup = findViewById(R.id.wake);
@@ -151,7 +151,6 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
 
         stopMedia = findViewById(R.id.stopMedia);
         stopMedia.setOnClickListener(new View.OnClickListener()
-
         {
             public void onClick(View var1) {
                 MediaOutputBridge.getInstance().clean();
@@ -203,11 +202,11 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
                 + ", isFinish=" + isFinish);
         if (!TextUtils.isEmpty(streamText)) {
             StringBuffer sbr = new StringBuffer();
-            String rex = "([\\u4e00-\\u9fa5]+)(\\s+)";
+            String rex = "(\\s*)([\\u4e00-\\u9fa5]+)(\\s+)";
             Pattern p = Pattern.compile(rex);
             Matcher m = p.matcher(streamText);
             while (m.find()) {
-                m.appendReplacement(sbr, m.group(1));
+                m.appendReplacement(sbr, m.group(2));
             }
             m.appendTail(sbr);
             asrResult.setText(sbr);

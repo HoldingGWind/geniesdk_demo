@@ -1,65 +1,66 @@
 {
-  "version": 20180328,
-  "env": "online",
-  "config": [
+  "config":[
     {
-      "environment": "online",
-      "system": {
-        "biz_type": "AILABS",
-        "biz_group": "TMALL_ROBOT"
+      "environment":"online",
+      "gateway_cloud":{
+        "addr":"g-aicloud.alibaba.com",
+        "port":443,
+        "protocol_ver":"1.0",
+        "use_ssl":true
       },
-      "gateway_cloud": {
-        "port": 443,
-        "use_ssl": true,
-        "protocol_ver": "1.0",
-        "addr": "g-aicloud.alibaba.com"
+      "speech":{
+        "addr":"asr-aicloud.alibaba.com",
+        "audio_type":"ogg",
+        "compress":"speex",
+        "coretype":"cn.asr.rec",
+        "port":443,
+        "quality":8,
+        "res":"aihome",
+        "use_ssl":true
       },
-      "speech": {
-        "addr": "asr-aicloud.alibaba.com",
-        "port": 443,
-        "use_ssl": true,
-        "coretype": "cn.asr.rec",
-        "res": "aihome",
-        "audio_type": "ogg",
-        "compress": "speex",
-        "quality": 8
+      "system":{
+        "biz_group":"CZ7DOLLM",
+        "biz_type":"Hisense",
+        "ca_path":"/data/geniesdk/config/ca.pem",
+        "dev_secret":"CKXYPOMJTSZEXQLKLVZTZEPHFFUGPVMN"
       }
     },
     {
-      "environment": "daily",
-      "system": {
-        "biz_type": "AILABS",
-        "biz_group": "TMALL_ROBOT"
+      "environment":"pre",
+      "gateway_cloud":{
+        "addr":"gdev-aicloud.alibaba.com",
+        "port":443,
+        "protocol_ver":"1.0",
+        "use_ssl":true
       },
-      "gateway_cloud": {
-        "port": 443,
-        "use_ssl": true,
-        "protocol_ver": "1.0",
-        "addr": "gdev-aicloud.alibaba.com"
+      "speech":{
+        "addr":"asr-aicloud.alibaba.com",
+        "audio_type":"ogg",
+        "compress":"speex",
+        "coretype":"cn.asr.rec",
+        "port":443,
+        "quality":8,
+        "res":"aihome",
+        "use_ssl":true
       },
-      "speech": {
-        "addr": "asr-aicloud.alibaba.com",
-        "port": 443,
-        "use_ssl": true,
-        "coretype": "cn.asr.rec",
-        "res": "aihome",
-        "audio_type": "ogg",
-        "compress": "speex",
-        "quality": 8
+      "system":{
+        "biz_group":"CZ7DOLLM",
+        "biz_type":"Hisense",
+        "ca_path":"/data/geniesdk/config/ca.pem",
+        "dev_secret":"CKXYPOMJTSZEXQLKLVZTZEPHFFUGPVMN"
       }
     }
   ],
-  "featureList": {
-    "otaUpdate": 1,
-    "countDown": 1,
-    "utpControl": 1,
-    "askCmdQueue": 1,
-    "voiceMessage": 1,
-    "deviceSetting": 1,
-    "iotSubDevice": 1,
-    "clockTimer": 1,
-    "nightLight": 1,
-    "operation": 1
-  }
+  "env":"online",
+  "featureList":{
+    "askCmdQueue":0,
+    "countDown":0,
+    "nightLight":0,
+    "otaUpdate":0,
+    "remoteDebug":0,
+    "utpControl":1,
+    "voiceMessage":1,
+    "volumeCtrl":0
+  },
+  "version":"20180425"
 }
-
