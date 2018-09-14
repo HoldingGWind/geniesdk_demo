@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.alibaba.ailabs.custom.audio.MediaOutputBridge;
+import com.alibaba.ailabs.custom.bean.GrantDialog;
 import com.alibaba.ailabs.custom.core.AliGenieSDK;
 import com.alibaba.ailabs.custom.util.SystemInfo;
 import com.alibaba.ailabs.geniesdk.audioin.recorder.NearFieldRecorder;
@@ -325,14 +326,6 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
     public void onNotify(int type, Object data, int arg1, int arg2) {
         LogUtils.d("type=" + type + ",Object=" + data + ",arg1=" + arg1 + ",arg2=" + arg2);
         switch (type) {
-//            case IBaseView.NOTIFY_THRIDAPP_CONTEXT: {
-//                if (data == null) {
-//                    mThirdContext = null;
-//                } else {
-//                    mThirdContext = data.toString();
-//                }
-//            }
-//            break;
             case IBaseView.NOTIFY_QRCODE_MESSAGE: {
                 //显示二维码
                 if (data != null) {
@@ -357,7 +350,13 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
                     listener.bindResponse(0, arg1 == 0 ? false : true, (UserData) data);
                 }
             }
-            break;
+            case NOTIFY_TVASSIST_BIND:
+                showGrantDialog(arg1);
+                break;
+            case NOTIFY_TVASSIST_BIND_SUCCESS:
+            case NOTIFY_TVASSIST_SCREEN_CLEAN:
+                dismissGrantDialog();
+                break;
         }
     }
 
@@ -403,7 +402,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
      */
     @Override
     public int pretreatedNLPResult(int sessionId, String command) {
-        Log.d(TAG, ">>>>>pretreatedNLPResult : command=" + command);
+        LogUtils.d(">>>>>pretreatedNLPResult : command=" + command,NearFieldDemoActivity.class);
         return ReturnCode.CONTINUE;
     }
 
@@ -415,6 +414,31 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
 
     public static void unregisterBindDeviceListener() {
         bindDeviceListener = null;
+    }
+
+
+
+    //授权验证的dialog
+    private GrantDialog mGrantDialog;
+
+    //显示授权dialog
+    public void showGrantDialog(int cid) {
+        LogUtils.d("showGrantDialog.cid = " + cid,NearFieldDemoActivity.class);
+        if (mGrantDialog != null) {
+            mGrantDialog.dismiss();
+            mGrantDialog = null;
+        }
+        mGrantDialog = new GrantDialog(this);
+        mGrantDialog.setCid(cid);
+        mGrantDialog.show();
+    }
+
+    //销毁授权窗口的dialog
+    public void dismissGrantDialog() {
+        if (mGrantDialog != null) {
+            mGrantDialog.dismiss();
+            mGrantDialog = null;
+        }
     }
 
 }
