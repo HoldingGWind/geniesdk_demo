@@ -19,10 +19,10 @@
         "use_ssl":true
       },
       "system":{
-        "biz_group":"CZ7DOLLM",
-        "biz_type":"Hisense",
+        "biz_group":"TMALL_ROBOT",
+        "biz_type":"AILABS",
         "ca_path":"/data/geniesdk/config/ca.pem",
-        "dev_secret":"CKXYPOMJTSZEXQLKLVZTZEPHFFUGPVMN"
+        "dev_secret":"db643dcd-b096-43e8-9707-6f34d36a1549"
       }
     },
     {
@@ -44,10 +44,10 @@
         "use_ssl":true
       },
       "system":{
-        "biz_group":"CZ7DOLLM",
-        "biz_type":"Hisense",
+        "biz_group":"TMALL_ROBOT",
+        "biz_type":"AILABS",
         "ca_path":"/data/geniesdk/config/ca.pem",
-        "dev_secret":"CKXYPOMJTSZEXQLKLVZTZEPHFFUGPVMN"
+        "dev_secret":"db643dcd-b096-43e8-9707-6f34d36a1549"
       }
     }
   ],
