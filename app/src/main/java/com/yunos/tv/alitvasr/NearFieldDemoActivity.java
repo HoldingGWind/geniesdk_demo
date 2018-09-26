@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.alibaba.ailabs.custom.audio.IMediaOutputListener;
 import com.alibaba.ailabs.custom.audio.MediaOutputBridge;
 import com.alibaba.ailabs.custom.bean.GrantDialog;
 import com.alibaba.ailabs.custom.core.AliGenieSDK;
@@ -155,6 +156,69 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
         {
             public void onClick(View var1) {
                 MediaOutputBridge.getInstance().clean();
+            }
+        });
+
+
+        MediaOutputBridge.getInstance().setMediaOutputListener(new IMediaOutputListener() {
+            @Override
+            public void onAudioPlayStart() {
+                LogUtils.d(">>>>> onAudioPlayStart");
+            }
+
+            @Override
+            public void onAudioPlayStop() {
+                LogUtils.d(">>>>> onAudioPlayStop");
+            }
+
+            @Override
+            public void onAudioPlayComplete() {
+                LogUtils.d(">>>>> onAudioPlayComplete");
+            }
+
+            @Override
+            public void onAudioPlayPause() {
+                LogUtils.d(">>>>> onAudioPlayPause");
+            }
+
+            @Override
+            public void onAudioPlayResume() {
+                LogUtils.d(">>>>> onAudioPlayResume");
+            }
+
+            @Override
+            public void onAudioPlaySuspend() {
+                LogUtils.d(">>>>> onAudioPlaySuspend");
+            }
+
+            @Override
+            public void onAudioPlaySuspend2Resume() {
+                LogUtils.d(">>>>> onAudioPlaySuspend2Resume");
+            }
+
+            @Override
+            public void onAudioSeek(int progress) {
+                LogUtils.d(">>>>> onAudioSeek");
+            }
+
+            @Override
+            public void onOneshotAudioPlayStart() {
+
+            }
+
+            @Override
+            public void onOneshotAudioPlayStop() {
+
+            }
+
+            @Override
+            public void onTtsStart() {
+                LogUtils.d(">>>>> onTtsStart");
+            }
+
+            @Override
+            public void onTtsStop(boolean expectSpeech) {
+                LogUtils.d(">>>>> onTtsStop");
             }
         });
     }
