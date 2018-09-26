@@ -86,7 +86,12 @@ public class BindDeviceGuideActivity extends Activity implements BindDeviceListe
                 String qrcode = getIntent().getStringExtra(NearFieldDemoActivity.QRCODE_KEY);
                 bindUser(0, qrcode);
             } else if (getIntent().getAction().equals(NearFieldDemoActivity.BIND_USER)) {
-                final UserData userData = AiLabsCore.getInstance().getUserData();
+                AiLabsCore aiLabsCore = AiLabsCore.getInstance();
+                if (null == aiLabsCore) {
+                    LogUtils.e("AiLabsCore has not init!");
+                    return;
+                }
+                final UserData userData = aiLabsCore.getUserData();
                 LogUtils.d("get userData=" + userData.toString());
                 if (userData != null && userData.getmUserType() == MEMBER_USER) {
                     //已经绑定过，则直接显示 用户头像浮层
