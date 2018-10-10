@@ -179,7 +179,7 @@ public class ProcessedAudioDataDemoActivity extends AppCompatActivity implements
                         } else {
                             if (mCallStop) {
                                 mCallStop = false;
-                                recorder.vadEnd();
+                                recorder.vadEnd(false);
                             }
                         }
                     }

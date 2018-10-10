@@ -182,7 +182,7 @@ public class RawAudioDataDemoActivity extends AppCompatActivity implements IUiMa
                         } else {
                             if (mCallStop) {
                                 mCallStop = false;
-                                recorder.vadEnd();
+                                recorder.vadEnd(false);
                             }
                         }
                     }

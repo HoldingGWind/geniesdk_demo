@@ -61,13 +61,13 @@ public class TextStreamDataDemoActivity extends AppCompatActivity implements IUi
     public void onButton1Click(View view) {
         recorder.wakeup(1.0, "tian mao jing ling");
         recorder.receiveTextSteam("我要听歌", true);
-        recorder.vadEnd();
+        recorder.vadEnd(false);
     }
 
     public void onButton2Click(View view) {
         recorder.wakeup(1.0, "tian mao jing ling");
         recorder.receiveTextSteam("今天的天气", true);
-        recorder.vadEnd();
+        recorder.vadEnd(false);
     }
 
     @Override

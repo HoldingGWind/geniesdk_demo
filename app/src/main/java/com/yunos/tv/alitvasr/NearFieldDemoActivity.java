@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.alibaba.ailabs.custom.audio.IMediaOutputListener;
 import com.alibaba.ailabs.custom.audio.MediaOutputBridge;
 import com.alibaba.ailabs.custom.bean.GrantDialog;
+import com.alibaba.ailabs.custom.command.IPreOnCommand;
 import com.alibaba.ailabs.custom.core.AliGenieSDK;
 import com.alibaba.ailabs.custom.util.SystemInfo;
 import com.alibaba.ailabs.geniesdk.audioin.recorder.NearFieldRecorder;
@@ -48,7 +49,7 @@ import java.util.regex.Pattern;
  * Created by miyang on 2018/8/7.
  */
 
-public class NearFieldDemoActivity extends AppCompatActivity implements IUiManager, IPreOnNLPResult {
+public class NearFieldDemoActivity extends AppCompatActivity implements IUiManager, IPreOnCommand {
     private static String TAG = "geniesdk";
     private static WeakReference<BindDeviceListener> bindDeviceListener;
 
@@ -139,7 +140,7 @@ public class NearFieldDemoActivity extends AppCompatActivity implements IUiManag
 
         {
             public void onClick(View var1) {
-                recorder.vadEnd();
+                recorder.vadEnd(true);
             }
         });
 
